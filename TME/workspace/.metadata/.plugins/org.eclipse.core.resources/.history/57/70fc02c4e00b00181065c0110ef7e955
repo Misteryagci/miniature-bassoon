@@ -1,0 +1,33 @@
+package algorithms;
+import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Exercice1 {
+	private ArrayList<Point> ensembleDepart;
+	/* Permet d'initialiser la liste des points de depart */
+	public static void readFile() {
+
+		try (BufferedReader br = new BufferedReader(new FileReader("./input.points"))) {
+
+			String sCurrentLine;
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Exercice1() {
+		this.ensembleDepart = new ArrayList<Point>();
+		//new Point(x, y)
+	}
+	
+	public static void main(String[] args) {
+		readFile();
+	}
+}

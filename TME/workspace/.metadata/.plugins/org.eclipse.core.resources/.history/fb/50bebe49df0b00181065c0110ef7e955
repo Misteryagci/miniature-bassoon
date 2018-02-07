@@ -1,0 +1,7 @@
+package algorithms;
+import java.awt.Point;
+
+public class Exercice1 {
+	public ArrayList<Point> ensembleDepart = new ArrayList<Point>();
+	
+}

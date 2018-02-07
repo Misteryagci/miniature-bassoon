@@ -1,0 +1,13 @@
+package algorithms;
+import java.awt.Point;
+import java.util.ArrayList;
+
+public class Exercice1 {
+	public ArrayList<Point> ensembleDepart = new ArrayList<Point>();
+	
+	/* Permet d'initialiser la liste des points de depart */
+	public Exercice1() {
+		
+	}
+	
+}

@@ -1,0 +1,79 @@
+package algorithms;
+import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Exercice1 {
+	private ArrayList<Point> ensembleDepart;
+	
+	/* 
+	 * Permet d'initialiser la liste des points de depart depuis le fichier input.points donné dans le TME
+	 * Retourne le nombre des points crées. 
+	*/
+	private int initaliseFromInputFile() {
+		int cpt = 0;
+		this.ensembleDepart = new ArrayList<Point>();
+		try (BufferedReader br = new BufferedReader(new FileReader("input.points"))) {
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				String[] lineTable = sCurrentLine.split(" ");
+				Point p = new Point(Integer.parseInt(lineTable[0]),Integer.parseInt(lineTable[1]));
+				this.ensembleDepart.add(p);
+				cpt++;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cpt;
+	}
+	
+	public Exercice1() {
+		this.initaliseFromInputFile();
+	}
+	
+	public ArrayList<Point> getEnsembleDeDepart() {
+		return this.ensembleDepart;
+	}
+	
+	public boolean removeFromEnsembleDeDepart(Point p) {
+		return this.ensembleDepart.remove(p);
+	}
+	
+	/* Permet de sélectionner un point aléatoire depuis l'ensemble des points de départ */
+	private Point selectRandomPoint() {
+		if ((this.ensembleDepart == null)||(this.ensembleDepart.size() == 0))
+		{
+			return null;
+		}
+		else 
+		{
+			int max = this.getEnsembleDeDepart().size();
+			int min = 0;
+			Random random = new Random();
+			int index = random.nextInt(max - min + 1) + min;
+			return this.ensembleDepart.get(index);
+		}
+	}
+	
+	public ArrayList<double> distances(Point p)
+	{
+		new ArrayList<double>()
+	}
+
+	
+	public static void main(String[] args) {
+		Exercice1 e = new Exercice1();
+		do {
+		/* On commence par sélectionner un point de départ aléatoire */
+		Point pd = e.selectRandomPoint();
+		/* Nous supprimons ce point depuis l'ensemble des points de départ */
+		e.removeFromEnsembleDeDepart(pd);
+		/* On calcule les distances des points restants au dernier point visité */
+		ArrayList<double> distances = new ArrayList<>
+		}while(e.getEnsembleDeDepart().size()>0);
+	}
+}

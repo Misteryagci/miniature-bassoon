@@ -1,0 +1,40 @@
+package algorithms;
+import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Exercice1 {
+	private ArrayList<Point> ensembleDepart;
+	
+	/* 
+	 * Permet d'initialiser la liste des points de depart depuis le fichier input.points donné dans le TME
+	 * Retourne le nombre des points crées. 
+	*/
+	public int initaliseFromInputFile() {
+		int cpt = 0;
+		this.ensembleDepart = new ArrayList<Point>();
+		try (BufferedReader br = new BufferedReader(new FileReader("input.points"))) {
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				String[] lineTable = sCurrentLine.split(" ");
+				Point p = new Point(Integer.parseInt(lineTable[0]),Integer.parseInt(lineTable[1]));
+				this.ensembleDepart.add(p);
+				cpt++;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cpt;
+	}
+	
+	public Exercice1() {
+		this.initaliseFromInputFile();
+	}
+	
+	public static void main(String[] args) {
+		readFile();
+	}
+}
