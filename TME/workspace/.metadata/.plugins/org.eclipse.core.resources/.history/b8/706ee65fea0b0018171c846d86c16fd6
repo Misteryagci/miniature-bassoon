@@ -1,0 +1,13 @@
+package algorithms;
+
+public class Exercice2 {
+	
+	/* La méthode retourne la l'ensemble de toutes les paire constitués de deux points de l'ensemble des points de départ */
+	public Array<Point> aretesCandidates() {
+		
+	}
+	
+	public Exercice2() {
+		
+	}
+}

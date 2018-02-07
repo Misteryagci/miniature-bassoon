@@ -1,0 +1,42 @@
+package algorithms;
+import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Collections;
+
+public class Exercice2 {
+	private ArrayList<Point> ensembleDepart;
+	
+	/* 
+	 * Permet d'initialiser la liste des points de depart depuis le fichier input.points donné dans le TME
+	 * Retourne le nombre des points crées. 
+	*/
+	private int initaliseFromInputFile() {
+		int cpt = 0;
+		this.ensembleDepart = new ArrayList<Point>();
+		try (BufferedReader br = new BufferedReader(new FileReader("input.points"))) {
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				String[] lineTable = sCurrentLine.split(" ");
+				Point p = new Point(Integer.parseInt(lineTable[0]),Integer.parseInt(lineTable[1]));
+				this.ensembleDepart.add(p);
+				cpt++;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cpt;
+	}
+	/* La méthode retourne la l'ensemble de toutes les paire constitués de deux points de l'ensemble des points de départ */
+	public ArrayList<Point> aretesCandidates() {
+		
+	}
+	
+	public Exercice2() {
+		
+	}
+}

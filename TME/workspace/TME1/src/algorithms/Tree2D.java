@@ -12,6 +12,12 @@ public class Tree2D {
     this.root=p;
     this.subtrees=trees;
   }
+  
+  public void addSubtree(Tree2D t)
+  {
+	  this.subtrees.add(t);
+  }
+  
   public Point getRoot(){
     return this.root;
   }
@@ -25,4 +31,6 @@ public class Tree2D {
     }
     return d;
   }
+
+  
 }

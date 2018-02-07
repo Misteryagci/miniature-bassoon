@@ -1,0 +1,34 @@
+package algorithms;
+import java.awt.Point;
+
+public class Arc {
+
+	private Point left;
+	private Point right;
+	private double poid;
+	
+	public Arc(Point left,Point right)
+	{
+		this.left = left;
+		this.right = right;
+		this.poid = this.right.distance(this.left);
+	}
+	
+	public double poid()
+	{
+		return this.poid;
+	}
+	
+	public Point getLeft() {
+		return this.left;
+	}
+	
+	public Point getRight() {
+		return this.right;
+	}
+	
+	public boolean isExtremite (Point p)
+	{
+		return (p.equals(this.left) || p.equals(this.right));
+	}
+}
