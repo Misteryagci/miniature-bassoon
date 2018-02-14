@@ -1,0 +1,113 @@
+package algorithms;
+
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.function.Function;
+
+import algorithms.Tree2D;
+
+public class DefaultTeam {
+
+
+    @FunctionalInterface
+    interface Function2 <A, B, R> { 
+    //R is like Return, but doesn't have to be last in the list nor named R.
+        public R apply (A a, B b);
+    }
+	
+	public int[][] calculShortestPaths(ArrayList<Point> points, int edgeThreshold) {
+		/* La variable n est initialisé à la taille de la liste des points */
+		int n = points.size();
+		/* La liste paths contient l'indice du point le plus proche sur le plus court chemin*/
+		int[][] paths=new int[n][n];
+		/* La matrice distances contient les distances */
+		double[][] distances = new double[n][n];;
+
+		/* 
+		 * On initialise les distances entre deux points avec la condition suivante
+		 *  - Si la distance entre deux points plus grand que le seuil, il est considéré comme infini
+		 *  - Sinon on initialise la case correspondant avec la distance correspondant
+		 * */
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < n; j++){
+				distances[i][j] = points.get(i).distance(points.get(j));
+				if (distances[i][j] > edgeThreshold){
+					distances[i][j] = Double.POSITIVE_INFINITY;
+				}
+			}
+		}
+
+		/* On initialise la matrice des plus court chemins avec l'index du point d'arrivée */
+		for (int i=0;i<n;i++){
+			for (int j=0;j<n;j++){ 
+				paths[i][j]=j;
+			}
+		}
+
+		/*
+		 * Pour déterminer si il y a un point k entre les points i et j (sur le chemin) dont la distance entre i et k et plus petit que la distance i et j,
+		 * on va utiliser 3 boucles imbriqués (comme on va tester les 3 distances entre 3 points)
+		 * */
+		for (int k = 0; k< n;k++)
+		{
+			System.out.println("k: " + k);
+			for (int i = 0; i< n; i++)
+			{
+				for (int j=0 ;j<n;j++)
+				{
+					/* 
+					 * Soient i,j,k trois indices des points
+					 * On va tester si la distance entre i et j et plus grand que la somme des distances des points i et k et des points k et j
+					 * */
+					if (distances[i][j] > (distances[i][k] + distances[k][j]))
+					{
+						/* Si c'est le cas c'est à dire qu'il existe un point k entre les points i et j, qui est plus proche à i.*/
+						paths[i][j] = paths[i][k]; /* Donc on change l'indice du point le plus proche sur le chemin i,j avec l'indice i,k*/
+						distances[i][j] = distances[i][k] + distances[k][j]; /* On change ainsi la distance entre des points i et j avec la somme des distances i,k et k,j*/
+					}
+				}
+			}
+		}
+
+		return paths;
+	}
+
+	public Tree2D calculSteiner(ArrayList<Point> points, int edgeThreshold, ArrayList<Point> hitPoints) {
+		final int[][] plusCourtChemins = this.calculShortestPaths(points, edgeThreshold);
+		/*
+		 * La fonction w retourne la longueur de la plus courte chemin entre les points i et j
+		 * */
+		Function2<Integer,Integer,Double> w = (i,j) -> {
+			int i1 = i,j1 = j;
+			double res = 0;
+			/* On parcourt la table des plus courts chemins tant qu'on arrive au point d'arrivé*/
+			while (i1 != j)
+			{
+				/* pc contient le point le plus proche à i sur le chemin i et j*/
+				int pc = plusCourtChemins[i1][j1];
+				i1 = pc;
+				res+= points.get(i1).distance(points.get(pc));
+			}
+			return  res;
+		};
+		
+		/* hn la taille de la liste hitPoints */
+		int hn = hitPoints.size();
+		
+		double[][] OS = new double[hn][hn]
+		
+		
+		//REMOVE >>>>>
+		Tree2D leafX = new Tree2D(new Point(700,400),new ArrayList<Tree2D>());
+		Tree2D leafY = new Tree2D(new Point(700,500),new ArrayList<Tree2D>());
+		Tree2D leafZ = new Tree2D(new Point(800,450),new ArrayList<Tree2D>());
+		ArrayList<Tree2D> subTrees = new ArrayList<Tree2D>();
+		subTrees.add(leafX);
+		subTrees.add(leafY);
+		subTrees.add(leafZ);
+		Tree2D steinerTree = new Tree2D(new Point(750,450),subTrees);
+		//<<<<< REMOVE
+
+		return steinerTree;
+	}
+}

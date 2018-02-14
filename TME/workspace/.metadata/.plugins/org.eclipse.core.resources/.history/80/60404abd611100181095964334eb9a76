@@ -1,0 +1,41 @@
+package algorithms;
+
+import java.awt.Point;
+import java.util.ArrayList;
+
+public class DefaultTeam {
+
+  public int[][] calculShortestPaths(ArrayList<Point> points, int edgeThreshold) {
+    int[][] paths=new int[points.size()][points.size()];
+    double[][] distances = new double[points.size()][points.size()];;
+    
+    for (int i = 0; i < points.size(); i++){
+    	for (int j = 0; j < points.size(); j++){
+    	    distances[i][j] = points.get(i).distance(points.get(j));
+    	    if (distances[i][j] > edgeThreshold){
+    	    	distances[i][j] = Double.POSITIVE_INFINITY;
+    	    }
+    	}
+    }
+    
+    
+    for (int i=0;i<paths.length;i++) for (int j=0;j<paths.length;j++) paths[i][j]=i;
+    int n = paths.length;
+    /**/
+    for (int k = 0; k< n;k++)
+    {
+    	for (int i = 0; i< n; i++)
+    	{
+    		for (int j=0 ;j<n;j++)
+    		{
+    			paths[i][j] = Math.min(paths[i][j], paths[i][k]+paths[k][j]);
+    					
+    		}
+    	}
+    }
+    
+    
+
+    return paths;
+  }
+}
